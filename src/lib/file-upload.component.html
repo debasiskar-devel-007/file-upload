@@ -1,0 +1,57 @@
+<!-- File Upload -->
+<div class="uploadfilecontainer" (click)="fileInput.click()" libDragDrop (onFileDropped)="selectFiles($event)">
+    <input hidden type="file" #fileInput (change)="selectFiles($event.target.files)" multiple>
+    <div class="uploadtextwrapper">
+        <h2>Drag and Drop Files</h2>
+        <p>Supported Formats:
+            <ng-container *ngFor="let val of configData.format; let i = index">
+                {{ val }}<ng-container *ngIf="i + 1 < configData.format.length">,</ng-container>
+            </ng-container>
+        </p>
+        <p>MAX Size: {{ configData.size }} KB</p>
+    </div>
+</div>
+
+<div class="button-group" *ngIf="files.length > 0">
+    <button mat-raised-button color="primary" (click)="uploadAll();">Upload All</button>
+    <button mat-raised-button color="warn" (click)="deleteAll();">Delete All</button>
+</div>
+
+<div class="files-view">
+    <!-- View Files -->
+    <mat-card class="example-card" *ngFor="let file of files; let i = index;">
+        <span class="viewUrlwrapper">
+            <img mat-card-image [src]="file.viewUrl" alt="{{ file.name }}" />
+        </span>
+        <span class="viewUrlcontent">
+            <mat-card-header>
+                <mat-card-title>{{ file.name }}</mat-card-title>
+                <mat-card-subtitle>Type: {{ file.type }}, Size:
+                    <ng-container *ngIf="file.size / 1000 > 999">
+                        {{ file.size / 1000 / 1000 | number: '.1-2' }} MB
+                    </ng-container>
+                    <ng-container *ngIf="file.size / 1000 < 1000">
+                        {{ file.size / 1000 | number: '.1-2' }} KB
+                    </ng-container>
+                </mat-card-subtitle>
+                <mat-card-subtitle class="error" *ngIf="file.valid.status == false">{{ file.valid.message }}
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <mat-progress-bar mode="determinate" *ngIf="file.upload.status == 'progress'"
+                    value="{{ file.upload.data.percentage }}"></mat-progress-bar>
+                <mat-progress-bar mode="indeterminate" *ngIf="file.upload.status == 'waiting'"></mat-progress-bar>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-raised-button matTooltip="Preview" aria-label="Preview" (click)="previewFiles(i);">Preview</button>
+
+                <button mat-raised-button color="primary" *ngIf="file.valid.status == true && file.upload.status != 'complete'" matTooltip="Upload" aria-label="Upload" (click)="uploading(i);">Upload</button>
+                <button mat-raised-button disabled *ngIf="file.upload.status == 'complete'">Upload Complete</button>
+
+                <button mat-raised-button color="warn" matTooltip="Remove" aria-label="Remove" (click)="removeFiles(i);">Remove</button>
+            </mat-card-actions>
+        </span>
+    </mat-card>
+</div>

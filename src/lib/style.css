@@ -1,0 +1,70 @@
+.uploadfilecontainer {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.uploadfilecontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.files-view {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.button-group {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 40px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.error.mat-card-subtitle {
+    color: #AA0000;
+}
+
+.example-card {
+    margin: auto;
+    margin-top: 6px;
+    max-width: 100%;
+}
+  
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+  
+
+.progress-bar {
+    margin-top: 24px;
+}
+
+.file-div {
+    background-color: #dedddc;
+    margin-top: 6px;
+}
+
